@@ -1,6 +1,7 @@
 
 import Part_1.Create_threads.Variant_1;
 import Part_1.Create_threads.Variant_2;
+import Part_1.Demon.ThreadDaemon;
 import Part_1.Stoping_threads.Variant_01;
 import Part_1.Stoping_threads.Variant_02;
 import Part_1.Stoping_threads.Variant_03;
@@ -8,6 +9,22 @@ import Part_1.Stoping_threads.Variant_03;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
+
+//===============================================================================================
+
+        //
+
+
+
+
+//===============================================================================================
+
+        // Daemon отделяет поток от общего и завершает его внезависимости от того, когда завершается основной.
+
+//        Thread threadDaemon = new Thread (new ThreadDaemon());
+//        threadDaemon.setDaemon(true);
+//        threadDaemon.start();
+//        System.out.println("thread finished");
 
 //===============================================================================================
 
