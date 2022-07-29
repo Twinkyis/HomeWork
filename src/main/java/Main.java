@@ -7,21 +7,63 @@ import Part_1.Stoping_threads.Variant_02;
 import Part_1.Stoping_threads.Variant_03;
 import Part_1.sync.sync_threads;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) throws InterruptedException {
+
+//===============================================================================================
+
+    // потокобезопасные коллекции: два типа из которых выходят все потокобезопасные коллекции - cuncurrent и copyOnWrite
+
+        // cuncurrent используется при необходимости одновременного доступа к одной коллекции
+
+
+
+
+        //синхронизированные коллекции - вид потокобезопасных коллеций созданных из обычных непотокобезопасных коллекций.
+        // суть в заточении обычной коллекции в обретку которая делает коллекцию потокобезопасной путем lock на доступ к коллекции пока с ней работает один поток
+//        ArrayList<String> arrayList = new ArrayList<>();
+//        arrayList.add("num_1");
+//        arrayList.add("num_2");
+//        arrayList.add("num_3");
+//
+//        List<String> syncList = Collections.synchronizedList(new ArrayList<>());
+//
+//        Runnable runnable = () -> {syncList.addAll(arrayList);};
+//
+//        Thread thread1 = new Thread(runnable);
+//        Thread thread2 = new Thread(runnable);
+//
+//        thread1.start();
+//        thread2.start();
+//
+//        System.out.println(syncList);
+
+        // copyOnWrite используется когда доступ на чтение больше чем на запись. Суть в том, что при записи создается внутренняя копия на которую вносятся изменения
+        // что позволяет предоставить доступ коллекции нескольким потокам
+
+        
+
+
+
+
 
 
 //===============================================================================================
 
         // синхронизация потоков
-
-       int a;
-
-        for (a = 0; a < 3 ; a++) {
-            Thread threadSync = new Thread(new sync_threads());
-            threadSync.getName();
-            threadSync.start();
-        }
+//
+//       int a;
+//
+//        for (a = 0; a < 3 ; a++) {
+//            Thread threadSync = new Thread(new sync_threads());
+//            threadSync.getName();
+//            threadSync.start();
+//        }
 
 
 
