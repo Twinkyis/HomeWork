@@ -1,31 +1,91 @@
+import Part_1.Atomic.AtomicIntegerEx;
+import Part_1.Atomic.RunnableEx;
 
-import Part_1.Create_threads.Variant_1;
-import Part_1.Create_threads.Variant_2;
-import Part_1.Demon.ThreadDaemon;
-import Part_1.Stoping_threads.Variant_01;
-import Part_1.Stoping_threads.Variant_02;
-import Part_1.Stoping_threads.Variant_03;
-import Part_1.sync.sync_threads;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Iterator;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
-//===============================================================================================
+// функциональный интерфейс - интерфейс который содержит не более одного метода. эти интерфейсы можно писать самому или пользоваться существующими
+// так же можно (нужно) использовать такие интерфейсы через аннотации
 
-    // потокобезопасные коллекции: два типа из которых выходят все потокобезопасные коллекции - cuncurrent и copyOnWrite
+//        @FunctionalInterface
+//        interface Predicate<T>{
+//        boolean test (T t);
+//        }
+
+//===============================================================================================
+        //атомарные типы данных нужны для того, что бы гарантировать выполнение операции путем неделимости (либо выполняется полностью либо не выполняется)
+        //так же это операции, которые есть потокобезопасными но при этом не используют блокировок
+
+//        RunnableEx runnableEx = new RunnableEx();
+//
+//
+//        Thread thread1 = new Thread(runnableEx);
+//        Thread thread2 = new Thread(runnableEx);
+//
+//        thread1.start();
+//        thread2.start();
+//        thread1.join();
+//        thread2.join();
+//
+//        System.out.println(AtomicIntegerEx.atomicInteger);
+
+//===============================================================================================
 
         // cuncurrent используется при необходимости одновременного доступа к одной коллекции
 
+//        ConcurrentHashMap<Integer, String> concurrentHashMap = new ConcurrentHashMap<>();
+//        concurrentHashMap.put(1, "num1");
+//        concurrentHashMap.put(2, "num2");
+//        concurrentHashMap.put(3, "num3");
+//        concurrentHashMap.put(4, "num3");
+//        concurrentHashMap.put(6, "num3");
+//        concurrentHashMap.put(7, "num3");
+//        System.out.println(concurrentHashMap);
+//
+//        Runnable runnable1 = () -> {
+//            Iterator<Integer> integerIterator = concurrentHashMap.keySet().iterator();
+//            while (integerIterator.hasNext()) {
+//                try {
+//                    Thread.sleep(100);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                Integer i = integerIterator.next();
+//                System.out.println(i + ":" + concurrentHashMap.get(i));
+//            }
+//        };
+//
+//            Runnable runnable2 = () -> {
+//                try{
+//                    Thread.sleep(300);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                concurrentHashMap.put(5, "SOME");
+//            };
+//
+//            Thread thread1 = new Thread(runnable1);
+//            Thread thread2 = new Thread(runnable2);
+//
+//            thread1.start();
+//            thread2.start();
+//            thread1.join();
+//            thread2.join();
+//
+//        System.out.println(concurrentHashMap);
 
+
+//===============================================================================================
 
 
         //синхронизированные коллекции - вид потокобезопасных коллеций созданных из обычных непотокобезопасных коллекций.
         // суть в заточении обычной коллекции в обретку которая делает коллекцию потокобезопасной путем lock на доступ к коллекции пока с ней работает один поток
+
 //        ArrayList<String> arrayList = new ArrayList<>();
 //        arrayList.add("num_1");
 //        arrayList.add("num_2");
@@ -43,8 +103,52 @@ public class Main {
 //
 //        System.out.println(syncList);
 
+
+//===============================================================================================
+
         // copyOnWrite используется когда доступ на чтение больше чем на запись. Суть в том, что при записи создается внутренняя копия на которую вносятся изменения
         // что позволяет предоставить доступ коллекции нескольким потокам
+
+//        CopyOnWriteArrayList<String> arrayList = new CopyOnWriteArrayList<>();
+//        arrayList.add("num1");
+//        arrayList.add("num2");
+//        arrayList.add("num3");
+//        arrayList.add("num4");
+//        arrayList.add("num5");
+//        arrayList.add("num6");
+//        arrayList.add("num7");
+//
+//        Runnable runnable1 = () -> {
+//            Iterator<String> iterator1 = arrayList.iterator();
+//            while (iterator1.hasNext()) {
+//                try {
+//                    Thread.sleep(1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                System.out.println(iterator1.next());
+//            }
+//        };
+//
+//            Runnable runnable2 = () -> {
+//                try{
+//                    Thread.sleep(3000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                arrayList.remove(6);
+//                arrayList.add("SEVEN_NUM");
+//            };
+//
+//            Thread thread1 = new Thread(runnable1);
+//            Thread thread2 = new Thread(runnable2);
+//
+//            thread1.start();
+//            thread2.start();
+//            thread1.join();
+//            thread2.join();
+//
+//        System.out.println(arrayList);
 
         
 
