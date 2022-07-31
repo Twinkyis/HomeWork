@@ -1,5 +1,8 @@
 import Part_1.Atomic.AtomicIntegerEx;
 import Part_1.Atomic.RunnableEx;
+import Part_2.Example1.ThreadA;
+import Part_2.Example1.ThreadB;
+import Part_2.Example1.ThreadC;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -8,6 +11,34 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
+
+
+//===============================================================================================
+
+//задание 1
+
+//        System.out.println("");
+//
+//        ThreadA threadA = new ThreadA();
+//        ThreadB threadB = new ThreadB();
+//        ThreadC threadC = new ThreadC();
+//
+//        threadA.setPriority(Thread.MAX_PRIORITY);
+//        threadB.setPriority(Thread.NORM_PRIORITY);
+//        threadC.setPriority(Thread.MIN_PRIORITY);
+//
+//
+//        threadA.start();
+//        threadB.start();
+//        threadC.start();
+//
+//        System.out.println(threadA + "" + threadB + "" + threadC);
+
+
+
+
+
+//===============================================================================================
 
 // функциональный интерфейс - интерфейс который содержит не более одного метода. эти интерфейсы можно писать самому или пользоваться существующими
 // так же можно (нужно) использовать такие интерфейсы через аннотации
