@@ -6,9 +6,7 @@ import java.util.List;
 
 public class List1 {
 
-      public  ArrayList<Integer> list = new ArrayList<>();
-
-      static List<Integer> syncList = Collections.synchronizedList(new ArrayList<>());
+      public static List<Integer> syncList = Collections.synchronizedList(new ArrayList<>());
 
 
 }

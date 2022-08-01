@@ -23,9 +23,6 @@ public class Main {
 
 //задание 3
 
-//
-//        List1 list1 = new List1();
-//        list1.list.add(1234);
 
 //        ThreadList thread1 = new ThreadList();
 //        ThreadList thread2 = new ThreadList();
@@ -34,8 +31,8 @@ public class Main {
 //        thread2.start();
 //        thread1.join();
 //        thread2.join();
-
-//        System.out.println(list1.list);
+//
+//        System.out.println(List1.syncList.size());
 
 //===============================================================================================
 
