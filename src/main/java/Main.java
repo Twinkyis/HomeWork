@@ -3,8 +3,11 @@ import Part_1.Atomic.RunnableEx;
 import Part_2.Example1.ThreadA;
 import Part_2.Example1.ThreadB;
 import Part_2.Example1.ThreadC;
+import Part_2.Example3.List1;
+import Part_2.Example3.ThreadList;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -12,6 +15,27 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
+
+
+
+
+//===============================================================================================
+
+//задание 3
+
+//
+//        List1 list1 = new List1();
+//        list1.list.add(1234);
+
+//        ThreadList thread1 = new ThreadList();
+//        ThreadList thread2 = new ThreadList();
+//
+//        thread1.start();
+//        thread2.start();
+//        thread1.join();
+//        thread2.join();
+
+//        System.out.println(list1.list);
 
 //===============================================================================================
 
@@ -22,11 +46,6 @@ public class Main {
 //        ThreadA threadA = new ThreadA();
 //        ThreadB threadB = new ThreadB();
 //        ThreadC threadC = new ThreadC();
-//
-//        threadA.setPriority(Thread.MAX_PRIORITY);
-//        threadB.setPriority(Thread.NORM_PRIORITY);
-//        threadC.setPriority(Thread.MIN_PRIORITY);
-//
 //
 //        threadA.start();
 //        threadB.start();

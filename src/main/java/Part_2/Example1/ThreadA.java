@@ -6,8 +6,8 @@ public class ThreadA extends Thread{
 
         for (int q = 0; q < 3; q++) {
             try {
-                System.out.print("A");
                 Thread.sleep(100);
+                System.out.print("A");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
