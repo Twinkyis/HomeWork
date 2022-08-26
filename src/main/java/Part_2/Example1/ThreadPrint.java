@@ -14,7 +14,7 @@ public class ThreadPrint extends Thread{
 
     public synchronized void run() {
 
-        for (int q = 0; q < 30; q++) {
+        for (int q = 0; q < 3; q++) {
             
             try {
                 System.out.print(print);
