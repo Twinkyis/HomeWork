@@ -1,17 +1,26 @@
 package Part_2.Example1;
 
+import java.util.concurrent.CountDownLatch;
+
 public class ThreadC extends Thread{
+
+
+    private String print;
+    public void name (String print){
+        this.print = print;
+    }
 
     public synchronized void run() {
 
-        for (int r = 0; r < 3; r++) {
-                try {
-                    Thread.sleep(130);
-                    System.out.println("C");
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-        }
+        for (int q = 0; q < 30; q++) {
 
+            try {
+                System.out.println(print);
+                ThreadPrint.countDownLatch.countDown();
+                Thread.yield();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }
