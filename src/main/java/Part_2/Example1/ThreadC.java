@@ -4,22 +4,33 @@ import java.util.concurrent.CountDownLatch;
 
 public class ThreadC extends Thread{
 
+    private final CountDownLatch countDownLatch;
+    private String print = "C";
 
-    private String print;
-    public void name (String print){
-        this.print = print;
+    ThreadC(CountDownLatch countDownLatch) {
+        this.countDownLatch = countDownLatch;
+        this.start();
     }
-
     public synchronized void run() {
+        for (int q = 0; q < 30; q++) {
+            if (){
+                try {
 
-        for (int q = 0; q < 3; q++) {
-
-            try {
                 System.out.println(print);
-                ThreadPrint.countDownLatch.countDown();
-                Thread.yield();
-            } catch (Exception e) {
+                countDownLatch.countDown();
+                countDownLatch.await();
+            }   catch (Exception e) {
                 throw new RuntimeException(e);
+            }
+            } else {
+                try {
+
+                    Thread.sleep(100);
+
+                } catch (InterruptedException e) {
+
+                    throw new RuntimeException(e);
+                }
             }
         }
     }

@@ -2,12 +2,12 @@ package Part_2.Example1;
 
 import java.util.concurrent.CountDownLatch;
 
-public class ThreadB extends Thread{
+public class ThreadA extends Thread{
 
     private final CountDownLatch countDownLatch;
-    private String print = "B";
+    private String print = "A";
 
-    ThreadB(CountDownLatch countDownLatch) {
+    ThreadA(CountDownLatch countDownLatch) {
         this.countDownLatch = countDownLatch;
         this.start();
     }
@@ -18,8 +18,9 @@ public class ThreadB extends Thread{
                 System.out.print(print);
                 countDownLatch.countDown();
                 countDownLatch.await();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
             }
             } else {
                 try {

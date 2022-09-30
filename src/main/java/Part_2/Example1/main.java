@@ -2,26 +2,30 @@ package Part_2.Example1;
 
 import java.util.concurrent.CountDownLatch;
 
-import static java.lang.Thread.*;
-
 public class main {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
-        ThreadPrint threadA = new ThreadPrint();
-        ThreadB threadB = new ThreadB();
-        ThreadC threadC = new ThreadC();
+        CountDownLatch countDownLatch = new CountDownLatch(3);
+                new ThreadA(countDownLatch);
+                new ThreadB(countDownLatch);
+                new ThreadC(countDownLatch);
 
-        threadA.name("A");
-        threadB.name("B");
-        threadC.name("C");
+//        ThreadPrint A = new ThreadPrint(countDownLatch);
+//        ThreadPrint B = new ThreadPrint(countDownLatch);
+//        ThreadPrint C = new ThreadPrint(countDownLatch);
+//
+//        A.name("a");
+//        B.name("b");
+//        C.name("c");
+//
+//        A.setPriority(Thread.MAX_PRIORITY);
+//        B.setPriority(Thread.NORM_PRIORITY);
+//        C.setPriority(Thread.MIN_PRIORITY);
+//
+//        A.start();
+//        B.start();
+//        C.start();
 
-        threadA.setPriority(MAX_PRIORITY);
-        threadB.setPriority(NORM_PRIORITY);
-        threadC.setPriority(MIN_PRIORITY);
-
-        threadA.start();
-        threadB.start();
-        threadC.start();
 
     }
 }
