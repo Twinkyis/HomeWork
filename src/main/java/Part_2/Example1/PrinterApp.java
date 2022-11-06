@@ -1,4 +1,4 @@
-package Part_2.Example1.Example_correct;
+package Part_2.Example1;
 
 public class PrinterApp {
     public static void main(String[] args) {
