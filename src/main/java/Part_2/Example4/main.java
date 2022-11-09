@@ -9,7 +9,7 @@ public class main {
         return new  Cars (carsNumber, (int) (Math.random() * 10 + 5));
     }
     static DataCar dataCar = new DataCar();
-
+    static Roads roads =  new Roads();
     public static void main(String[] args) throws InterruptedException {
 
 
@@ -26,7 +26,7 @@ public class main {
         System.out.println("Внимание!");
         dataCar.LATCH.countDown(); // Уменьшаем счетчик на 1
         Thread.sleep(1000);
-        System.out.println("Марш!");
+        System.out.println("Начали!");
         dataCar.LATCH.countDown(); // Уменьшаем счетчик на 1
 
     }

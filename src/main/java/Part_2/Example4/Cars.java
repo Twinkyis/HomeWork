@@ -14,13 +14,14 @@ public class Cars implements Runnable{
     public void run() {
         try {
             timerForReady timerForReady1 = new timerForReady();    // таймер до 7 секунд на подготовку
+
             Thread.sleep(timerForReady1.rnd);
-            System.out.print(timerForReady1.rnd);
-            System.out.println(" car " + carsNumber + " ready");
+            System.out.print("car " + carsNumber + " ready ");
+            System.out.println("[ " + timerForReady1.rnd + " millis" + " ]");
             main.dataCar.LATCH.countDown();
             main.dataCar.LATCH.await();
 
-            Thread.sleep(main.dataCar.trackLength / carsSpeed * 10);
+            Thread.sleep(main.roads.trackLength / carsSpeed * 10);
 
             System.out.println("car " + carsNumber + " finished");
         } catch (InterruptedException e) {

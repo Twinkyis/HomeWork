@@ -5,7 +5,4 @@ import java.util.concurrent.CountDownLatch;
 public class DataCar {
     public static final int Car_Count = 10;
     public static CountDownLatch LATCH;
-    public static final int trackLength = 3000;
-
-
 }
