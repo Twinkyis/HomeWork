@@ -12,15 +12,15 @@ public class Main {
 //задание 3
 
 
-        ThreadList thread1 = new ThreadList();
-        ThreadList thread2 = new ThreadList();
-
-        thread1.start();
-        thread2.start();
-        thread1.join();
-        thread2.join();
-
-        System.out.println(List1.syncList.size());
+//        ThreadList thread1 = new ThreadList();
+//        ThreadList thread2 = new ThreadList();
+//
+//        thread1.start();
+//        thread2.start();
+//        thread1.join();
+//        thread2.join();
+//
+//        System.out.println(List1.syncList.size());
 
 //===============================================================================================
 
