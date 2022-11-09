@@ -23,11 +23,10 @@ public class Cars implements Runnable{
 
             try {
     main.dataCar.SEMAPHORE.acquire();
-    System.out.println("проверка свободной полосы");
     int controlNum = -1;
     synchronized (CONTROL_PLACES) {
         for (int a = 0;
-             a < main.dataCar.COUNT_CONTROL_PLACES; a++)
+             a < main.dataCar.Tunnel_road_line; a++)
         if (CONTROL_PLACES[a]) {
             CONTROL_PLACES[a] = false;
             controlNum = a;
@@ -35,15 +34,15 @@ public class Cars implements Runnable{
             break;
         }
     }
-    Thread.sleep(main.roads.trackLength3 / carsSpeed * 10);
+    Thread.sleep(main.roads.trackLength2 / carsSpeed * 10);
     synchronized (CONTROL_PLACES) {
         CONTROL_PLACES[controlNum] = true;
     }
-    // Освобождение ресурса
     main.dataCar.SEMAPHORE.release();
-    System.out.printf(
-            " авто выехало из туннеля " + carsNumber);
+    System.out.println(
+            " авто " + carsNumber + " выехало из туннеля ");
                 } catch (InterruptedException e) {}
+
                 Thread.sleep(main.roads.trackLength3 / carsSpeed * 10);
                 System.out.println("car " + carsNumber + " finished");
         } catch (InterruptedException e) {
