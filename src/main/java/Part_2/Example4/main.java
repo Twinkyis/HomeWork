@@ -12,7 +12,6 @@ public class main {
     static Roads roads =  new Roads();
     public static void main(String[] args) throws InterruptedException {
 
-
         dataCar.LATCH = new CountDownLatch(dataCar.Car_Count + 3);
 
         for (int i = 1; i <= dataCar.Car_Count; i++) {
