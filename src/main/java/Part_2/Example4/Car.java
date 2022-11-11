@@ -1,17 +1,16 @@
 package Part_2.Example4;
 
+
 import java.util.HashMap;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Semaphore;
 
+public class Car extends Thread {
 
-public class Cars implements Runnable {
+    map map = new map();
 
     private int carsNumber;
     private int carsSpeed;
 
-    public Cars (int carsNumber, int carsSpeed) {
+    public Car(int carsNumber, int carsSpeed) {
         this.carsNumber = carsNumber;
         this.carsSpeed = carsSpeed;
     }
@@ -22,7 +21,7 @@ public class Cars implements Runnable {
         return (int) (Math.random() * max);
     }
 
-    Roads roads =  new Roads();
+    Track track =  new Track();
     static Data data = new Data();
 
     public void run() {
@@ -34,9 +33,8 @@ public class Cars implements Runnable {
             data.LATCH.countDown();
             data.LATCH.await();
             stopWatch.start(); // start StopWatch
-            Thread.sleep(roads.trackLength1 / carsSpeed);
+            Thread.sleep(track.trackLength1 / carsSpeed);
             System.out.println("авто " + carsNumber + " подьехало к туннелю");
-
                 try {
                     data.SEMAPHORE.acquire();
                     int controlNum = -1;
@@ -50,8 +48,7 @@ public class Cars implements Runnable {
                             break;
                             }
                     }
-
-                    Thread.sleep(roads.trackLength2 / carsSpeed);
+                    Thread.sleep(track.trackLength2 / carsSpeed);
                     synchronized (data.CONTROL_PLACES) {
                     data.CONTROL_PLACES[controlNum] = true;
                     }
@@ -59,14 +56,15 @@ public class Cars implements Runnable {
                     System.out.println("авто " + carsNumber + " выехало из туннеля ");
                 } catch (InterruptedException e) {
                 }
-
-            Thread.sleep(roads.trackLength3 / carsSpeed);
+            Thread.sleep(track.trackLength3 / carsSpeed);
                 System.out.println("car " + carsNumber + " finished");
             stopWatch.stop(); // stop StopWatch
-                System.out.println("car #" + carsNumber + " : Total time = " + stopWatch.getElapsedTimeSecs() + " millis : " + " max speed = " + carsSpeed);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+//                System.out.println("car #" + carsNumber + " : Total time = " + stopWatch.getElapsedTimeSecs() + " millis : " + " speed = " + carsSpeed);
+            map.map1.put(carsNumber, (int) stopWatch.getElapsedTime());
+            System.out.println(map.map1);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
+        }
     }
-}
 
