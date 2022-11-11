@@ -4,8 +4,5 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TableLeaders {
-
-    static ArrayList<Integer> list = new ArrayList<>();
-
-
+    ArrayList<Integer> list = new ArrayList<>();
 }

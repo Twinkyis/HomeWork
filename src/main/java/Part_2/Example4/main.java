@@ -4,35 +4,31 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Semaphore;
 public class main {
 
-    public static Cars creatorCars (final int carsNumber) {
-        return new  Cars (carsNumber, (int) (Math.random() * 360 * Math.random()));
+    public static Cars creatorCars(final int carsNumber) {
+        return new  Cars (carsNumber, (int) (110 + Math.random() * 250));
         }
-    static DataCar dataCar = new DataCar();
-    static Roads roads =  new Roads();
 
     public static void main(String[] args) throws InterruptedException {
 
-        dataCar.LATCH = new CountDownLatch(dataCar.CountCar + 3);
+        Cars.data.LATCH = new CountDownLatch(Cars.data.CountCar + 3);
 
-        dataCar.CONTROL_PLACES = new boolean[dataCar.Tunnel_road_line];
-        for (int i = 0; i < dataCar.Tunnel_road_line; i++)
-            dataCar.CONTROL_PLACES[i] = true;
-        dataCar.SEMAPHORE = new Semaphore(dataCar.CONTROL_PLACES.length, true);
+        Cars.data.CONTROL_PLACES = new boolean[Cars.data.Tunnel_road_line];
+        for (int i = 0; i < Cars.data.Tunnel_road_line; i++)
+            Cars.data.CONTROL_PLACES[i] = true;
+        Cars.data.SEMAPHORE = new Semaphore(Cars.data.CONTROL_PLACES.length, true);
 
-
-
-        for (int i = 1; i <= dataCar.CountCar; i++) {
+        for (int i = 1; i <= Cars.data.CountCar; i++) {
                         new Thread (creatorCars(i)).start();
         }
 
         Thread.sleep(7100);
         System.out.println("На старт!");
-        dataCar.LATCH.countDown();  // Уменьшаем счетчик на 1
+        Cars.data.LATCH.countDown();  // Уменьшаем счетчик на 1
         Thread.sleep(1000);
         System.out.println("Внимание!");
-        dataCar.LATCH.countDown(); // Уменьшаем счетчик на 1
+        Cars.data.LATCH.countDown(); // Уменьшаем счетчик на 1
         Thread.sleep(1000);
         System.out.println("Начали!");
-        dataCar.LATCH.countDown(); // Уменьшаем счетчик на 1
+        Cars.data.LATCH.countDown(); // Уменьшаем счетчик на 1
     }
 }
