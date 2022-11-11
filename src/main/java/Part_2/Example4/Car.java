@@ -1,14 +1,16 @@
 package Part_2.Example4;
 
 
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.HashMap;
 
 public class Car extends Thread {
 
     map map = new map();
 
-    private int carsNumber;
-    private int carsSpeed;
+    private final int carsNumber;
+    private final int carsSpeed;
 
     public Car(int carsNumber, int carsSpeed) {
         this.carsNumber = carsNumber;
@@ -59,12 +61,16 @@ public class Car extends Thread {
             Thread.sleep(track.trackLength3 / carsSpeed);
                 System.out.println("car " + carsNumber + " finished");
             stopWatch.stop(); // stop StopWatch
-//                System.out.println("car #" + carsNumber + " : Total time = " + stopWatch.getElapsedTimeSecs() + " millis : " + " speed = " + carsSpeed);
-            map.map1.put(carsNumber, (int) stopWatch.getElapsedTime());
-            System.out.println(map.map1);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+
+            map.carNum.put("Car ", carsNumber);
+            map.carsPeed.put("Total Time ", (int) stopWatch.getElapsedTime());
+
+            data.LATCH2.countDown();
+            data.LATCH2.await();
+            System.out.println(map.carNum + " " + map.carsPeed);
+            }  catch (InterruptedException e){
+            throw new RuntimeException(e);
         }
     }
+}
 

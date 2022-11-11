@@ -8,5 +8,6 @@ public class Data {
     public int CountCar = 10;
     public Semaphore SEMAPHORE = null;
     public CountDownLatch LATCH;
+    public CountDownLatch LATCH2;
     public static boolean[] CONTROL_PLACES = null;
 }

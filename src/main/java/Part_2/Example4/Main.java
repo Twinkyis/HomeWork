@@ -1,9 +1,8 @@
 package Part_2.Example4;
 
-import java.util.HashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Semaphore;
-public class main {
+public class Main {
 
     public static Car creatorCars(final int carsNumber) {
         return new Car(carsNumber, (int) (110 + Math.random() * 250));
@@ -12,6 +11,7 @@ public class main {
     public static void main(String[] args) throws InterruptedException {
 
         Car.data.LATCH = new CountDownLatch(Car.data.CountCar + 3);
+        Car.data.LATCH2 = new CountDownLatch(Car.data.CountCar);
 
         Car.data.CONTROL_PLACES = new boolean[Car.data.Tunnel_road_line];
         for (int i = 0; i < Car.data.Tunnel_road_line; i++)
