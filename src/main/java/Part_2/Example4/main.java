@@ -1,10 +1,12 @@
 package Part_2.Example4;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Semaphore;
 public class main {
+
     public static Cars creatorCars (final int carsNumber) {
-        return new  Cars (carsNumber, (int) (Math.random() * 10 + 5));
-    }
+        return new  Cars (carsNumber, (int) (Math.random() * 360 * Math.random()));
+        }
     static DataCar dataCar = new DataCar();
     static Roads roads =  new Roads();
 
@@ -17,8 +19,10 @@ public class main {
             dataCar.CONTROL_PLACES[i] = true;
         dataCar.SEMAPHORE = new Semaphore(dataCar.CONTROL_PLACES.length, true);
 
+
+
         for (int i = 1; i <= dataCar.CountCar; i++) {
-            new Thread (creatorCars(i)).start();
+                        new Thread (creatorCars(i)).start();
         }
 
         Thread.sleep(7100);
@@ -30,6 +34,5 @@ public class main {
         Thread.sleep(1000);
         System.out.println("Начали!");
         dataCar.LATCH.countDown(); // Уменьшаем счетчик на 1
-
     }
 }
