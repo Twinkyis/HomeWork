@@ -1,14 +1,20 @@
 package Part_2.Example4;
 
+import java.sql.SQLException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Semaphore;
+
 public class Main {
 
     public static Car creatorCars(final int carsNumber) {
         return new Car(carsNumber, (int) (110 + Math.random() * 250));
         }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, SQLException {
+
+
+
+// ==================================================================================================
 
         Car.data.LATCH = new CountDownLatch(Car.data.CountCar + 3);
         Car.data.LATCH2 = new CountDownLatch(Car.data.CountCar);
@@ -31,5 +37,9 @@ public class Main {
         Thread.sleep(1000);
         System.out.println("Начали!");
         Car.data.LATCH.countDown(); // Уменьшаем счетчик на 1
+
+        TableLeaders tableLeaders = new TableLeaders();
+        tableLeaders.start();
+        tableLeaders.join();
     }
 }

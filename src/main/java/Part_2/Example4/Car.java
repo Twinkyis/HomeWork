@@ -1,21 +1,19 @@
 package Part_2.Example4;
 
 
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
-import java.util.HashMap;
+import dao.CarService;
+import dao.Cars;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Car extends Thread {
 
-    map map = new map();
+    ArrayList<Integer> carNum = new ArrayList<>();
+    ArrayList<Integer> carTime = new ArrayList<>();
 
-    private final int carsNumber;
-    private final int carsSpeed;
-
-    public Car(int carsNumber, int carsSpeed) {
-        this.carsNumber = carsNumber;
-        this.carsSpeed = carsSpeed;
-    }
+    Track track =  new Track();
+    static Data data = new Data();
 
     final int max = 7000;
     final int rnd = rnd(max);
@@ -23,20 +21,25 @@ public class Car extends Thread {
         return (int) (Math.random() * max);
     }
 
-    Track track =  new Track();
-    static Data data = new Data();
+    private final int carNumber;
+    private final int carsSpeed;
+
+    public Car(int carNumber, int carsSpeed) {
+        this.carNumber = carNumber;
+        this.carsSpeed = carsSpeed;
+    }
 
     public void run() {
         try {
             StopWatch stopWatch = new StopWatch(); // add StopWatch
             Thread.sleep(rnd);
-            System.out.print("car " + carsNumber + " ready ");
+            System.out.print("car " + carNumber + " ready ");
             System.out.println("[ " + rnd + " millis" + " ]");
             data.LATCH.countDown();
             data.LATCH.await();
             stopWatch.start(); // start StopWatch
             Thread.sleep(track.trackLength1 / carsSpeed);
-            System.out.println("авто " + carsNumber + " подьехало к туннелю");
+            System.out.println("авто " + carNumber + " подьехало к туннелю");
                 try {
                     data.SEMAPHORE.acquire();
                     int controlNum = -1;
@@ -46,7 +49,7 @@ public class Car extends Thread {
                             if (data.CONTROL_PLACES[a]) {
                             data.CONTROL_PLACES[a] = false;
                             controlNum = a;
-                            System.out.println("авто " + carsNumber + " заехал в туннель");
+                            System.out.println("авто " + carNumber + " заехал в туннель");
                             break;
                             }
                     }
@@ -55,22 +58,25 @@ public class Car extends Thread {
                     data.CONTROL_PLACES[controlNum] = true;
                     }
                     data.SEMAPHORE.release();
-                    System.out.println("авто " + carsNumber + " выехало из туннеля ");
+                    System.out.println("авто " + carNumber + " выехало из туннеля ");
                 } catch (InterruptedException e) {
                 }
             Thread.sleep(track.trackLength3 / carsSpeed);
-                System.out.println("car " + carsNumber + " finished");
+                System.out.println("car " + carNumber + " finished");
             stopWatch.stop(); // stop StopWatch
 
-            map.carNum.put("Car ", carsNumber);
-            map.carsPeed.put("Total Time ", (int) stopWatch.getElapsedTime());
-
             data.LATCH2.countDown();
-            data.LATCH2.await();
-            System.out.println(map.carNum + " " + map.carsPeed);
-            }  catch (InterruptedException e){
+
+            Cars cars = new Cars();
+            cars.setidCar(carNumber);
+            cars.setTotalTime((int) stopWatch.getElapsedTime());
+            cars.setnameCar("bob");
+
+            CarService carService = new CarService();
+            carService.updateProduct(cars);
+
+            }  catch (InterruptedException | SQLException e){
             throw new RuntimeException(e);
         }
     }
 }
-
