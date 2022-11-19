@@ -21,7 +21,7 @@ public class CarService extends Util implements CarDAO {
         try {
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setLong(1, carsService.getidCar());
+            preparedStatement.setLong(1, carsService.getIdCar());
             preparedStatement.setString(2, carsService.getNameCar());
             preparedStatement.setInt(3, carsService.getTotalTime());
 
@@ -107,7 +107,7 @@ public class CarService extends Util implements CarDAO {
         try {
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setInt(1, carsService.getidCar());
+            preparedStatement.setInt(1, carsService.getIdCar());
             preparedStatement.setString(2, carsService.getNameCar());
             preparedStatement.setInt(3, carsService.getTotalTime());
 
@@ -130,7 +130,7 @@ public class CarService extends Util implements CarDAO {
         String sql = "DELETE FROM CAR WHERE IDCAR = ?";
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setLong(1, carsService.getidCar());
+            preparedStatement.setLong(1, carsService.getIdCar());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

@@ -3,6 +3,7 @@ package dao;
 import javax.persistence.*;
 
 @Entity
+@Table (name = "Cars", schema = "first_try", catalog = "")
 public class Cars {
     private int idCar;
     private String NameCar;
@@ -10,7 +11,7 @@ public class Cars {
 
     @Id
     @Column(name = "idCar", nullable = false)
-    public int getidCar() {
+    public int getIdCar() {
         return idCar;
     }
 

@@ -1,22 +1,12 @@
 package Part_2.Example4;
 
-
-import dao.CarService;
-import dao.Cars;
-
-import java.sql.SQLException;
-import java.util.ArrayList;
-
 public class Car extends Thread {
 
-    ArrayList<Integer> carNum = new ArrayList<>();
-    ArrayList<Integer> carTime = new ArrayList<>();
-
-    Track track =  new Track();
-    static Data data = new Data();
+    static ConcurrencyControl concurrencyControl = new ConcurrencyControl();
 
     final int max = 7000;
     final int rnd = rnd(max);
+
     public int rnd(final int max) {
         return (int) (Math.random() * max);
     }
@@ -29,54 +19,54 @@ public class Car extends Thread {
         this.carsSpeed = carsSpeed;
     }
 
-    public void run() {
-        try {
-            StopWatch stopWatch = new StopWatch(); // add StopWatch
-            Thread.sleep(rnd);
-            System.out.print("car " + carNumber + " ready ");
-            System.out.println("[ " + rnd + " millis" + " ]");
-            data.LATCH.countDown();
-            data.LATCH.await();
-            stopWatch.start(); // start StopWatch
-            Thread.sleep(track.trackLength1 / carsSpeed);
-            System.out.println("авто " + carNumber + " подьехало к туннелю");
-                try {
-                    data.SEMAPHORE.acquire();
-                    int controlNum = -1;
-                    synchronized (data.CONTROL_PLACES) {
-                        for (int a = 0;
-                        a < data.Tunnel_road_line; a++)
-                            if (data.CONTROL_PLACES[a]) {
-                            data.CONTROL_PLACES[a] = false;
-                            controlNum = a;
-                            System.out.println("авто " + carNumber + " заехал в туннель");
-                            break;
-                            }
-                    }
-                    Thread.sleep(track.trackLength2 / carsSpeed);
-                    synchronized (data.CONTROL_PLACES) {
-                    data.CONTROL_PLACES[controlNum] = true;
-                    }
-                    data.SEMAPHORE.release();
-                    System.out.println("авто " + carNumber + " выехало из туннеля ");
-                } catch (InterruptedException e) {
-                }
-            Thread.sleep(track.trackLength3 / carsSpeed);
-                System.out.println("car " + carNumber + " finished");
-            stopWatch.stop(); // stop StopWatch
-
-            data.LATCH2.countDown();
-
-            Cars cars = new Cars();
-            cars.setidCar(carNumber);
-            cars.setTotalTime((int) stopWatch.getElapsedTime());
-            cars.setnameCar("bob");
-
-            CarService carService = new CarService();
-            carService.updateProduct(cars);
-
-            }  catch (InterruptedException | SQLException e){
-            throw new RuntimeException(e);
-        }
-    }
+//    public void run() {
+//        try {
+//            StopWatch stopWatch = new StopWatch(); // add StopWatch
+//            Thread.sleep(rnd);
+//            System.out.print("car " + carNumber + " ready ");
+//            System.out.println("[ " + rnd + " millis" + " ]");
+//            concurrencyControl.latch.countDown();
+//            concurrencyControl.latch.await();
+//            stopWatch.start(); // start StopWatch
+//            Thread.sleep(Track.SEGMENT_1_LENGTH / carsSpeed);
+//            System.out.println("авто " + carNumber + " подьехало к туннелю");
+//            try {
+//                concurrencyControl.semaphore.acquire();
+//                int controlNum = -1;
+//                synchronized (Track.CONTROL_PLACE_FOR_SEGMENT_2) {
+//                    for (int a = 0;
+//                         a < Track.MAX_NUMBER_OF_CARS_INSIDE_SEGMENT_2; a++)
+//                        if (Track.CONTROL_PLACE_FOR_SEGMENT_2[a]) {
+//                            Track.CONTROL_PLACE_FOR_SEGMENT_2[a] = false;
+//                            controlNum = a;
+//                            System.out.println("авто " + carNumber + " заехал в туннель");
+//                            break;
+//                        }
+//                }
+//                Thread.sleep(Track.SEGMENT_2_LENGTH / carsSpeed);
+//                synchronized (Track.CONTROL_PLACE_FOR_SEGMENT_2) {
+//                    Track.CONTROL_PLACE_FOR_SEGMENT_2[controlNum] = true;
+//                }
+//                concurrencyControl.semaphore.release();
+//                System.out.println("авто " + carNumber + " выехало из туннеля ");
+//            } catch (InterruptedException e) {
+//            }
+//            Thread.sleep(Track.SEGMENT_3_LENGTH / carsSpeed);
+//            System.out.println("car " + carNumber + " finished");
+//            stopWatch.stop(); // stop StopWatch
+//
+//            Cars cars = new Cars();
+//            cars.setidCar(carNumber);
+//            cars.setnameCar("bob");
+//            cars.setTotalTime((int) stopWatch.getElapsedTime());
+//
+//            CarService carService = new CarService();
+//            carService.updateProduct(cars);
+//
+//            concurrencyControl.latch2.countDown();
+//
+//        } catch (InterruptedException | SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 }

@@ -2,7 +2,6 @@ package Part_2.Example4;
 
 import dao.CarService;
 import dao.Cars;
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -11,7 +10,7 @@ public class TableLeaders extends Thread{
     public void run () {
 
         try {
-            Car.data.LATCH2.await();
+            Car.concurrencyControl.latch2.await();
 
             CarService carService = new CarService();
             List<Cars> d = carService.getAllProduct();
